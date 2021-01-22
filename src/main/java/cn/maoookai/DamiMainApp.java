@@ -1,6 +1,7 @@
 package cn.maoookai;
 
 import cn.maoookai.listener.MainListener;
+import cn.maoookai.util.FileReadUtil;
 import net.mamoe.mirai.Bot;
 import net.mamoe.mirai.BotFactory;
 import net.mamoe.mirai.utils.BotConfiguration;
@@ -9,10 +10,13 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 public class DamiMainApp {
-    public static void main(String[] args) throws IOException {
+
+    public static void main(String[] args) throws Exception {
         InputStream in = new FileInputStream("config.properties");
         Properties properties = new Properties();
         properties.load(in);
@@ -24,6 +28,7 @@ public class DamiMainApp {
             redirectBotLogToFile(new File(properties.getProperty("mirai.log.path")));
         }});
         dami.login();
+
         new MainListener().initListener();
     }
 }
