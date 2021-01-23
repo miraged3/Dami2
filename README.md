@@ -8,8 +8,8 @@
 
 在包路径下新建config.properties
 ````
-qq.account=1785861255
-qq.password=Lemonade110
+qq.account=123456789
+qq.password=123456789
 mirai.log.path=mirai.log
 ````
 
