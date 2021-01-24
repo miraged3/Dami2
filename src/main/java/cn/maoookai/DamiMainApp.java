@@ -26,7 +26,7 @@ public class DamiMainApp {
             redirectBotLogToFile(new File("mirai.log"));
         }});
         dami.login();
-
         new MainListener().initListener();
+        //TODO 打包时签名出错
     }
 }

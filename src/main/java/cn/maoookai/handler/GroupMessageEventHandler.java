@@ -49,7 +49,6 @@ public class GroupMessageEventHandler extends DamiMainApp {
 
     public void onMessage(@NotNull GroupMessageEvent event) throws IOException {
 
-        Contact sender = event.getSender();
         Contact fromGroup = event.getGroup();
 
         if (event.getMessage().contentToString().equals("³é¿¨")){
