@@ -21,7 +21,7 @@ public class DamiMainApp {
             fileBasedDeviceInfo();
             File oldLog = new File("mirai.log");
             if (oldLog.exists())
-                System.out.println("旧日志删除结果为" + oldLog.delete());
+                System.out.println("正在清理旧的日志......" + oldLog.delete());
             System.out.println("当前日志目录为" + oldLog.getAbsolutePath() );
             redirectBotLogToFile(new File("mirai.log"));
         }});
