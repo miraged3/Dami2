@@ -3,6 +3,7 @@ package cn.maoookai;
 import cn.maoookai.listener.MainListener;
 import net.mamoe.mirai.Bot;
 import net.mamoe.mirai.BotFactory;
+import net.mamoe.mirai.contact.Contact;
 import net.mamoe.mirai.utils.BotConfiguration;
 
 import java.io.File;
@@ -17,16 +18,16 @@ public class DamiMainApp {
         Properties properties = new Properties();
         properties.load(in);
         Bot dami = BotFactory.INSTANCE.newBot(Long.parseLong(properties.getProperty("qq.account")), properties.getProperty("qq.password"), new BotConfiguration() {{
-            setProtocol(MiraiProtocol.ANDROID_PAD);
+            setProtocol(MiraiProtocol.ANDROID_WATCH);
             fileBasedDeviceInfo();
             File oldLog = new File("mirai.log");
             if (oldLog.exists())
-                System.out.println("正在清理旧的日志......" + oldLog.delete());
-            System.out.println("当前日志目录为" + oldLog.getAbsolutePath() );
+                System.out.println("Cleaning old logs......" + oldLog.delete());
+            System.out.println("Current log directory is " + oldLog.getAbsolutePath() );
             redirectBotLogToFile(new File("mirai.log"));
         }});
         dami.login();
-        new MainListener().initListener();
-        //TODO 打包时签名出错
+        new MainListener().initListener(dami);
+        //TODO: 打包时签名出错
     }
 }

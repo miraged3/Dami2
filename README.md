@@ -12,7 +12,6 @@
 ````
 qq.account=123456789        你的QQ账号
 qq.password=123456789       该账号的密码
-mirai.log.path=mirai.log    日志存放的位置
 ````
 ### 2.启动大米
 
