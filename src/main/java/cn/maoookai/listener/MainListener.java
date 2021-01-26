@@ -19,11 +19,9 @@ public class MainListener {
             e.printStackTrace();
         }
     });
-    Listener<StrangerMessageEvent> strangerMessageListener = GlobalEventChannel.INSTANCE.subscribeAlways(StrangerMessageEvent.class, strangerMessageEvent -> new StrangerMessageEventHandler().onMessage(strangerMessageEvent));
 
     public void initListener(Bot bot) {
         new FriendMessageListener(bot);
         groupMessageEventListener.start();
-        strangerMessageListener.start();
     }
 }
