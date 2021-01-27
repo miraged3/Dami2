@@ -17,7 +17,7 @@ public class DailyEnglishService {
             in = new FileInputStream("config.properties");
             Properties properties = new Properties();
             properties.load(in);
-            icibaUrl=properties.getProperty("dailyEnglish.url");
+            icibaUrl = properties.getProperty("dailyEnglish.url");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -39,8 +39,8 @@ public class DailyEnglishService {
     }
 
     @Test
-    public void test(){
-        System.out.println(getCurrentDateFromDailySentence() + " Ã¿ÈÕÒ»¾ä\n" + getDailySentenceEnglish() + '\n' + getDailySentenceChinese());
+    public void test() {
+        System.out.println(getCurrentDateFromDailySentence() + " æ¯æ—¥ä¸€å¥\n" + getDailySentenceEnglish() + '\n' + getDailySentenceChinese());
     }
 
 }

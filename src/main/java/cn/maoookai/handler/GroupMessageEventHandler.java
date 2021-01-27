@@ -26,19 +26,19 @@ public class GroupMessageEventHandler extends DamiMainApp {
 
     static {
         try {
-            rSet = FileReadUtil.getFiles(miraiResPath+"R");
-            srSet = FileReadUtil.getFiles(miraiResPath+"SR");
-            ssrSet = FileReadUtil.getFiles(miraiResPath+"SSR");
-            spSet = FileReadUtil.getFiles(miraiResPath+"SP");
+            rSet = FileReadUtil.getFiles(miraiResPath + "R");
+            srSet = FileReadUtil.getFiles(miraiResPath + "SR");
+            ssrSet = FileReadUtil.getFiles(miraiResPath + "SSR");
+            spSet = FileReadUtil.getFiles(miraiResPath + "SP");
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    //TODO: ʽ��ͼƬ�Ż���ͼƬƴ���Ż�
-    static File summon(){
+    //TODO: 式神图片优化、图片拼接优化
+    static File summon() {
         File summonResult;
-        int result= RandomNumberUtil.getRandomNumber(1000);
+        int result = RandomNumberUtil.getRandomNumber(1000);
         if (result < 762)
             summonResult = rSet.get(RandomNumberUtil.getRandomNumber(rSet.size()));
         else if (result < 962)
@@ -50,20 +50,20 @@ public class GroupMessageEventHandler extends DamiMainApp {
         return summonResult;
     }
 
-    public void onMessage(@NotNull GroupMessageEvent event) throws IOException {
+    public void onMessage(@NotNull GroupMessageEvent event, Bot bot) throws IOException {
 
         Contact fromGroup = event.getGroup();
         MessageChain messages = event.getMessage();
         String messageContent = messages.contentToString();
 
-        if (event.getMessage().contentToString().equals("�鿨")){
+        if (event.getMessage().contentToString().equals("抽卡")) {
             Image summonImage = fromGroup.uploadImage(ExternalResource.create(summon()));
             fromGroup.sendMessage(new At(event.getSender().getId()).plus(summonImage));
         }
-        if (event.getMessage().contentToString().equals("ʮ��")){
-            File summonResult=summon();
+        if (event.getMessage().contentToString().equals("十连")) {
+            File summonResult = summon();
             for (int i = 0; i < 9; i++) {
-                summonResult= ImageStitchUtil.bufferedToFile(summonResult,summon());
+                summonResult = ImageStitchUtil.bufferedToFile(summonResult, summon());
             }
             Image summonImage = fromGroup.uploadImage(ExternalResource.create(summonResult));
             fromGroup.sendMessage(new At(event.getSender().getId()).plus(summonImage));

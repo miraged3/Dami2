@@ -56,7 +56,7 @@ public class YokaiSummonService {
     }
 
     @Test
-    public void test(){
+    public void test() {
         System.out.println(summonTenTimes());
     }
 

@@ -9,6 +9,6 @@ public class FriendMessageEventHandler {
     public void onMessage(@NotNull FriendMessageEvent event, Bot bot) {
         Contact lemon = bot.getFriend(1220568032L);
         assert lemon != null;
-        lemon.sendMessage("test");
+        lemon.sendMessage(event.getMessage().contentToString());
     }
 }
