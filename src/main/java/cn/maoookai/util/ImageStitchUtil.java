@@ -1,7 +1,6 @@
 package cn.maoookai.util;
 
 import org.jetbrains.annotations.NotNull;
-import org.junit.Test;
 
 import javax.imageio.ImageIO;
 import java.awt.*;

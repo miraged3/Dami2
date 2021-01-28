@@ -2,10 +2,12 @@ package cn.maoookai.listener;
 
 import net.mamoe.mirai.Bot;
 
+import java.util.Properties;
+
 public class MainListener {
-    public void initListener(Bot bot) {
-        new FriendMessageListener(bot);
-        new StrangerMessageListener(bot);
-        new GroupMessageListener(bot);
+    public void initListener(Bot bot, Properties properties) {
+        new FriendMessageListener(bot, properties);
+        new StrangerMessageListener(bot, properties);
+        new GroupMessageListener(bot, properties);
     }
 }

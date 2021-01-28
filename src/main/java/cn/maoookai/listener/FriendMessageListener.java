@@ -6,11 +6,13 @@ import net.mamoe.mirai.event.GlobalEventChannel;
 import net.mamoe.mirai.event.Listener;
 import net.mamoe.mirai.event.events.FriendMessageEvent;
 
+import java.util.Properties;
+
 public class FriendMessageListener extends MainListener {
 
-    public FriendMessageListener(Bot bot) {
+    public FriendMessageListener(Bot bot, Properties properties) {
         Listener<FriendMessageEvent> friendMessageEventListener;
-        friendMessageEventListener = GlobalEventChannel.INSTANCE.subscribeAlways(FriendMessageEvent.class, friendMessageEvent -> new FriendMessageEventHandler().onMessage(friendMessageEvent, bot));
+        friendMessageEventListener = GlobalEventChannel.INSTANCE.subscribeAlways(FriendMessageEvent.class, friendMessageEvent -> new FriendMessageEventHandler().onMessage(friendMessageEvent, bot, properties));
         friendMessageEventListener.start();
     }
 }

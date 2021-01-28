@@ -1,15 +1,15 @@
 package cn.maoookai.handler;
 
-import cn.maoookai.DamiMainApp;
+import cn.maoookai.service.DailyEnglishService;
 import cn.maoookai.util.FileReadUtil;
 import cn.maoookai.util.ImageStitchUtil;
 import cn.maoookai.util.RandomNumberUtil;
 import net.mamoe.mirai.Bot;
-import net.mamoe.mirai.contact.AnonymousMember;
 import net.mamoe.mirai.contact.Contact;
-import net.mamoe.mirai.contact.Member;
 import net.mamoe.mirai.event.events.GroupMessageEvent;
-import net.mamoe.mirai.message.data.*;
+import net.mamoe.mirai.message.data.At;
+import net.mamoe.mirai.message.data.Image;
+import net.mamoe.mirai.message.data.MessageChain;
 import net.mamoe.mirai.utils.ExternalResource;
 import org.jetbrains.annotations.NotNull;
 
@@ -17,7 +17,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class GroupMessageEventHandler extends DamiMainApp {
+public class GroupMessageEventHandler {
     static String miraiResPath = "res/";
     static ArrayList<File> rSet;
     static ArrayList<File> srSet;
@@ -56,17 +56,21 @@ public class GroupMessageEventHandler extends DamiMainApp {
         MessageChain messages = event.getMessage();
         String messageContent = messages.contentToString();
 
-        if (event.getMessage().contentToString().equals("抽卡")) {
+        if (messageContent.equals("抽卡")) {
             Image summonImage = fromGroup.uploadImage(ExternalResource.create(summon()));
             fromGroup.sendMessage(new At(event.getSender().getId()).plus(summonImage));
         }
-        if (event.getMessage().contentToString().equals("十连")) {
+        if (messageContent.equals("十连")) {
             File summonResult = summon();
             for (int i = 0; i < 9; i++) {
                 summonResult = ImageStitchUtil.bufferedToFile(summonResult, summon());
             }
             Image summonImage = fromGroup.uploadImage(ExternalResource.create(summonResult));
             fromGroup.sendMessage(new At(event.getSender().getId()).plus(summonImage));
+        }
+
+        if (messageContent.equals("正能量") || messageContent.equals("每日一句") || messageContent.equals("学英语")) {
+            fromGroup.sendMessage(DailyEnglishService.getDailyEnglish());
         }
 
     }

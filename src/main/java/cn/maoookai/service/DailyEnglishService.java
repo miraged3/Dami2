@@ -2,9 +2,12 @@ package cn.maoookai.service;
 
 import cn.maoookai.util.JsonUtil;
 import net.sf.json.JSONObject;
-import org.junit.Test;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
-import java.io.*;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 
 public class DailyEnglishService {
@@ -23,7 +26,13 @@ public class DailyEnglishService {
         }
     }
 
-    public String getDailySentenceEnglish() {
+    @NotNull
+    @Contract(" -> new")
+    public static String getDailyEnglish() {
+        return getCurrentDateFromDailySentence() + " 每日一句\n" + getDailySentenceEnglish() + '\n' + getDailySentenceChinese();
+    }
+
+    static String getDailySentenceEnglish() {
         JSONObject getDailySentence = JSONObject.fromObject(JsonUtil.jsonHandler(icibaUrl));
         return getDailySentence.getString("content");
     }
@@ -36,11 +45,6 @@ public class DailyEnglishService {
     static String getCurrentDateFromDailySentence() {
         JSONObject getDailySentence = JSONObject.fromObject(JsonUtil.jsonHandler(icibaUrl));
         return getDailySentence.getString("dateline");
-    }
-
-    @Test
-    public void test() {
-        System.out.println(getCurrentDateFromDailySentence() + " 每日一句\n" + getDailySentenceEnglish() + '\n' + getDailySentenceChinese());
     }
 
 }

@@ -2,12 +2,12 @@ package cn.maoookai.service;
 
 import cn.maoookai.util.RandomNumberUtil;
 import org.jetbrains.annotations.NotNull;
-import org.junit.Test;
 
 import java.util.Random;
 
 import static cn.maoookai.util.YokaiUtil.*;
 
+@Deprecated
 public class YokaiSummonService {
 
     static String ssrSummoner() {
@@ -53,11 +53,6 @@ public class YokaiSummonService {
             result.append(summon()).append('\n');
         }
         return result.toString();
-    }
-
-    @Test
-    public void test() {
-        System.out.println(summonTenTimes());
     }
 
 }

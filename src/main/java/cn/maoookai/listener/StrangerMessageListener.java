@@ -6,11 +6,12 @@ import net.mamoe.mirai.event.GlobalEventChannel;
 import net.mamoe.mirai.event.Listener;
 import net.mamoe.mirai.event.events.StrangerMessageEvent;
 
+import java.util.Properties;
+
 public class StrangerMessageListener {
-    public StrangerMessageListener(Bot bot) {
+    public StrangerMessageListener(Bot bot, Properties properties) {
         Listener<StrangerMessageEvent> strangerMessageListener;
-        strangerMessageListener = GlobalEventChannel.INSTANCE.subscribeAlways(StrangerMessageEvent.class, strangerMessageEvent -> new StrangerMessageEventHandler().onMessage(strangerMessageEvent));
+        strangerMessageListener = GlobalEventChannel.INSTANCE.subscribeAlways(StrangerMessageEvent.class, strangerMessageEvent -> new StrangerMessageEventHandler().onMessage(strangerMessageEvent, bot, properties));
         strangerMessageListener.start();
-        //TODO: 陌生人消息转发给admin（使用properties）
     }
 }
