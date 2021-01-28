@@ -11,5 +11,6 @@ public class StrangerMessageListener {
         Listener<StrangerMessageEvent> strangerMessageListener;
         strangerMessageListener = GlobalEventChannel.INSTANCE.subscribeAlways(StrangerMessageEvent.class, strangerMessageEvent -> new StrangerMessageEventHandler().onMessage(strangerMessageEvent));
         strangerMessageListener.start();
+        //TODO: 陌生人消息转发给admin（使用properties）
     }
 }
