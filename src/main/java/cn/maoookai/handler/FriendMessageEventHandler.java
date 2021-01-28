@@ -9,6 +9,7 @@ import java.util.Properties;
 
 public class FriendMessageEventHandler {
     public void onMessage(@NotNull FriendMessageEvent event, @NotNull Bot bot, @NotNull Properties properties) {
+        //TODO: 图片转发
         Contact admin = bot.getFriend(Long.parseLong(properties.getProperty("qq.admin")));
         assert admin != null;
         admin.sendMessage("好友" + event.getSender().getId() + event.getSender().getNick() + "发来了消息：" + event.getMessage().contentToString());
