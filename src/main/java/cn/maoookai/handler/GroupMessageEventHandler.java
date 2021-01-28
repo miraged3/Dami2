@@ -1,6 +1,6 @@
 package cn.maoookai.handler;
 
-import cn.maoookai.service.DailyEnglishService;
+import cn.maoookai.service.impl.DailyEnglishServiceImpl;
 import cn.maoookai.util.FileReadUtil;
 import cn.maoookai.util.ImageStitchUtil;
 import cn.maoookai.util.RandomNumberUtil;
@@ -16,6 +16,7 @@ import org.jetbrains.annotations.NotNull;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Properties;
 
 public class GroupMessageEventHandler {
     static String miraiResPath = "res/";
@@ -50,7 +51,7 @@ public class GroupMessageEventHandler {
         return summonResult;
     }
 
-    public void onMessage(@NotNull GroupMessageEvent event, Bot bot) throws IOException {
+    public void onMessage(@NotNull GroupMessageEvent event, Bot bot, Properties properties) throws IOException {
 
         Contact fromGroup = event.getGroup();
         MessageChain messages = event.getMessage();
@@ -58,7 +59,7 @@ public class GroupMessageEventHandler {
 
         if (messageContent.equals("抽卡")) {
             Image summonImage = fromGroup.uploadImage(ExternalResource.create(summon()));
-            fromGroup.sendMessage(new At(event.getSender().getId()).plus(summonImage));
+            fromGroup.sendMessage(new At(event.getSender().getId()).plus("你召唤的结果为：").plus(summonImage));
         }
         if (messageContent.equals("十连")) {
             File summonResult = summon();
@@ -66,11 +67,12 @@ public class GroupMessageEventHandler {
                 summonResult = ImageStitchUtil.bufferedToFile(summonResult, summon());
             }
             Image summonImage = fromGroup.uploadImage(ExternalResource.create(summonResult));
-            fromGroup.sendMessage(new At(event.getSender().getId()).plus(summonImage));
+            fromGroup.sendMessage(new At(event.getSender().getId()).plus("你召唤的结果为：").plus(summonImage));
         }
 
         if (messageContent.equals("正能量") || messageContent.equals("每日一句") || messageContent.equals("学英语")) {
-            fromGroup.sendMessage(DailyEnglishService.getDailyEnglish());
+            DailyEnglishServiceImpl dailyEnglishService = new DailyEnglishServiceImpl();
+            fromGroup.sendMessage(dailyEnglishService.getTodayEnglish(properties.getProperty("daily.url")));
         }
 
     }

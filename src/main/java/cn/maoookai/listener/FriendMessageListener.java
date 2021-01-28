@@ -8,7 +8,7 @@ import net.mamoe.mirai.event.events.FriendMessageEvent;
 
 import java.util.Properties;
 
-public class FriendMessageListener extends MainListener {
+public class FriendMessageListener {
 
     public FriendMessageListener(Bot bot, Properties properties) {
         Listener<FriendMessageEvent> friendMessageEventListener;
