@@ -20,8 +20,9 @@ public class DamiMainApp {
             setProtocol(MiraiProtocol.ANDROID_PHONE);
             fileBasedDeviceInfo();
             File oldLog = new File("mirai.log");
-            if (oldLog.exists())
-                System.out.println("Cleaning old logs......" + oldLog.delete());
+            File oldImage = new File("stitchedImage.jpg");
+            if (oldLog.exists() || oldImage.exists())
+                System.out.println("Cleaning old logs and files......" + oldLog.delete() + oldImage.delete());
             System.out.println("Current log directory is " + oldLog.getAbsolutePath());
             redirectBotLogToFile(new File("mirai.log"));
         }});
