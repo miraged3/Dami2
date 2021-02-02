@@ -27,5 +27,6 @@ public class DamiMainApp {
         }});
         dami.login();
         new MainListener().initListener(dami, properties);
+        dami.join();
     }
 }
