@@ -3,11 +3,10 @@ package cn.maoookai.util;
 import org.jetbrains.annotations.NotNull;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class ImageStitchUtil {
 
@@ -17,16 +16,30 @@ public class ImageStitchUtil {
     }
 
     @NotNull
-    public static File bufferedToFile(File file1, File file2,Boolean isHorizontal) throws IOException {
-        Image image = mergeImage(isHorizontal,getBufferedImage(file1), getBufferedImage(file2));
+    public static File bufferedToFile(@NotNull ArrayList<File> file) throws IOException {
+        BufferedImage image1 = ImageIO.read(file.get(0));
+        BufferedImage image2 = ImageIO.read(file.get(4));
+        BufferedImage image3 = ImageIO.read(new File("res/null.jpg"));
+        for (int i = 1; i < 4; i++) {
+            image1 = mergeImage(true, image1, ImageIO.read(file.get(i)));
+        }
+        for (int i = 5; i < 8; i++) {
+            image2 = mergeImage(true, image2, ImageIO.read(file.get(i)));
+        }
+        image3 = mergeImage(true, image3, ImageIO.read(file.get(8)));
+        image3 = mergeImage(true, image3, ImageIO.read(file.get(9)));
+        image3 = mergeImage(true, image3, ImageIO.read(new File("res/null.jpg")));
+        image2 = mergeImage(false, image1, image2);
+        image3 = mergeImage(false, image2, image3);
+
         File outfile = new File("stitchedImage.jpg");
-        ImageIO.write((RenderedImage) image, "jpg", outfile);
+        ImageIO.write(image3, "jpg", outfile);
         return outfile;
     }
 
 
     @NotNull
-    public static BufferedImage mergeImage(boolean isHorizontal, BufferedImage... images) {
+    public static BufferedImage mergeImage(boolean isHorizontal, @NotNull BufferedImage... images) {
         // 生成新图片
         BufferedImage destImage;
         // 计算新图片的长和高

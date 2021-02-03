@@ -16,7 +16,6 @@ import org.jetbrains.annotations.NotNull;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
 
 public class GroupMessageEventHandler {
@@ -51,14 +50,14 @@ public class GroupMessageEventHandler {
         return summonResult;
     }
 
-    //TODO: 式神图片优化、图片拼接优化
+    //TODO: 式神图片优化
     private File summonOne() {
         return summon();
     }
 
     @NotNull
-    private List<File> summonTenTimes() {
-        List<File> listResult = new ArrayList<>();
+    private ArrayList<File> summonTenTimes() {
+        ArrayList<File> listResult = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             listResult.add(summon());
         }
@@ -76,21 +75,10 @@ public class GroupMessageEventHandler {
             fromGroup.sendMessage(new At(event.getSender().getId()).plus("你召唤出了：").plus(summonImage));
         }
         if (messageContent.equals("十连")) {
-            List<File> result = summonTenTimes();
-            File summonImage1 = result.get(0);
-            File summonImage2 = result.get(4);
-            File summonImage3 = new File("res/null.jpg");
-            for (int i = 1; i < 4; i++)
-                summonImage1 = ImageStitchUtil.bufferedToFile(summonImage1, result.get(i), true);
-            for (int i = 5; i < 8; i++)
-                summonImage2 = ImageStitchUtil.bufferedToFile(summonImage2, result.get(i), true);
-            summonImage3 = ImageStitchUtil.bufferedToFile(summonImage3, result.get(8), true);
-            summonImage3 = ImageStitchUtil.bufferedToFile(summonImage3, result.get(9), true);
-            summonImage3 = ImageStitchUtil.bufferedToFile(summonImage3, new File("res/null.jpg"), true);
-            File summonImage4 = ImageStitchUtil.bufferedToFile(summonImage1, summonImage2, false);
-//            summonImage4 = ImageStitchUtil.bufferedToFile(summonImage4, summonImage3, false);
-            Image summonImage = fromGroup.uploadImage(ExternalResource.create(summonImage4));
-            fromGroup.sendMessage(new At(event.getSender().getId()).plus("你召唤出了：").plus(result.toString()).plus(summonImage));
+            ArrayList<File> result = summonTenTimes();
+            File pic = ImageStitchUtil.bufferedToFile(result);
+            Image summonImage = fromGroup.uploadImage(ExternalResource.create(pic));
+            fromGroup.sendMessage(new At(event.getSender().getId()).plus("你召唤出了：").plus(summonImage));
         }
 
         if (messageContent.equals("正能量") || messageContent.equals("每日一句") || messageContent.equals("学英语")) {
