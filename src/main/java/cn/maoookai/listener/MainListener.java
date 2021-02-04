@@ -11,5 +11,6 @@ public class MainListener {
         new FriendMessageListener(bot, properties);
         new StrangerMessageListener(bot, properties);
         new GroupMessageListener(bot, properties);
+        new MemberJoinEventListener(bot, properties);
     }
 }
