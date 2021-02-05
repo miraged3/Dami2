@@ -8,7 +8,11 @@
 
 ## 使用
 
-### 1.配置config.properties配置文件，内容如下
+### 1.环境配置
+
+Java 11+
+
+### 2.配置config.properties配置文件，内容如下
 
 | 配置 | 说明 |
 | ---- | ----|
@@ -17,7 +21,7 @@
 | qq.admin= | 管理员的QQ号 |
 | daily.english=http://open.iciba.com/dsapi/ | 金山词霸每日一句链接，默认不用修改
 
-### 2.启动大米
+### 3.启动大米
 
 Windows：StartDami.bat
 
