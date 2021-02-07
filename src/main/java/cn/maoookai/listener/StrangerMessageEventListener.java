@@ -8,8 +8,8 @@ import net.mamoe.mirai.event.events.StrangerMessageEvent;
 
 import java.util.Properties;
 
-public class StrangerMessageListener {
-    public StrangerMessageListener(Bot bot, Properties properties) {
+public class StrangerMessageEventListener {
+    public StrangerMessageEventListener(Bot bot, Properties properties) {
         Listener<StrangerMessageEvent> strangerMessageListener;
         strangerMessageListener = GlobalEventChannel.INSTANCE.subscribeAlways(StrangerMessageEvent.class, strangerMessageEvent -> new StrangerMessageEventHandler().onMessage(strangerMessageEvent, bot, properties));
         strangerMessageListener.start();

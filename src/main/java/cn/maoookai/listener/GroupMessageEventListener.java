@@ -9,9 +9,9 @@ import net.mamoe.mirai.event.events.GroupMessageEvent;
 import java.io.IOException;
 import java.util.Properties;
 
-public class GroupMessageListener {
+public class GroupMessageEventListener {
 
-    public GroupMessageListener(Bot bot, Properties properties) {
+    public GroupMessageEventListener(Bot bot, Properties properties) {
         Listener<GroupMessageEvent> groupMessageEventListener = GlobalEventChannel.INSTANCE.subscribeAlways(GroupMessageEvent.class, groupMessageEvent -> {
             try {
                 new GroupMessageEventHandler().onMessage(groupMessageEvent, bot, properties);

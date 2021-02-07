@@ -8,10 +8,11 @@ public class MainListener {
     public void initListener(Bot bot, Properties properties) {
         //TODO: 其他事件的监听
         new BotOfflineEventListener(bot, properties);
-        new FriendMessageListener(bot, properties);
-        new StrangerMessageListener(bot, properties);
-        new GroupMessageListener(bot, properties);
+        new FriendMessageEventListener(bot, properties);
+        new StrangerMessageEventListener(bot, properties);
+        new GroupMessageEventListener(bot, properties);
         new MemberJoinEventListener(bot, properties);
         new BotGroupPermissionChangeEventListener(bot, properties);
+        new BotJoinOrLeaveGroupEventListener(bot,properties);
     }
 }

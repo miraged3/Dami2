@@ -8,9 +8,9 @@ import net.mamoe.mirai.event.events.FriendMessageEvent;
 
 import java.util.Properties;
 
-public class FriendMessageListener {
+public class FriendMessageEventListener {
 
-    public FriendMessageListener(Bot bot, Properties properties) {
+    public FriendMessageEventListener(Bot bot, Properties properties) {
         Listener<FriendMessageEvent> friendMessageEventListener;
         friendMessageEventListener = GlobalEventChannel.INSTANCE.subscribeAlways(FriendMessageEvent.class, friendMessageEvent -> new FriendMessageEventHandler().onMessage(friendMessageEvent, bot, properties));
         friendMessageEventListener.start();
