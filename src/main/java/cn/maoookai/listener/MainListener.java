@@ -12,5 +12,6 @@ public class MainListener {
         new StrangerMessageListener(bot, properties);
         new GroupMessageListener(bot, properties);
         new MemberJoinEventListener(bot, properties);
+        new BotGroupPermissionChangeEventListener(bot, properties);
     }
 }

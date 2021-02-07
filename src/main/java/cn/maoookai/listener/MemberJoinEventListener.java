@@ -9,9 +9,9 @@ import net.mamoe.mirai.event.events.MemberJoinEvent;
 import java.util.Properties;
 
 public class MemberJoinEventListener {
-    public MemberJoinEventListener(Bot bot, Properties properties){
+    public MemberJoinEventListener(Bot bot, Properties properties) {
         Listener<MemberJoinEvent> memberJoinEventListener;
-        memberJoinEventListener = GlobalEventChannel.INSTANCE.subscribeAlways(MemberJoinEvent.class,memberJoinEvent -> new MemberJoinEventHandler().onJoin(memberJoinEvent,bot,properties));
+        memberJoinEventListener = GlobalEventChannel.INSTANCE.subscribeAlways(MemberJoinEvent.class, memberJoinEvent -> new MemberJoinEventHandler().onJoin(memberJoinEvent, bot, properties));
         memberJoinEventListener.start();
     }
 }
