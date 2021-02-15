@@ -18,7 +18,7 @@ public class DamiMainApp {
         Properties properties = new Properties();
         properties.load(in);
         Bot dami = BotFactory.INSTANCE.newBot(Long.parseLong(properties.getProperty("qq.account")), properties.getProperty("qq.password"), new BotConfiguration() {{
-            setProtocol(MiraiProtocol.ANDROID_PHONE);
+            setProtocol(MiraiProtocol.ANDROID_WATCH);
             fileBasedDeviceInfo();
             File oldLog = new File("mirai.log");
             if (oldLog.exists())
