@@ -19,7 +19,7 @@ Java 11+
 | qq.account= | 你的QQ账号 |
 | qq.password= | 该账号的密码 |
 | qq.admin= | 管理员的QQ号 |
-| daily.english=http://open.iciba.com/dsapi/ | 金山词霸每日一句链接，默认不用修改
+| daily.url=http://open.iciba.com/dsapi/ | 金山词霸每日一句链接，默认不用修改
 
 ### 3.启动大米
 

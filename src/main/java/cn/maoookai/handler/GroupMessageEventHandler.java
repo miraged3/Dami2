@@ -64,7 +64,7 @@ public class GroupMessageEventHandler {
         return listResult;
     }
 
-    public void onMessage(@NotNull GroupMessageEvent event, Bot bot, Properties properties) throws IOException {
+    public void onMessage(@NotNull GroupMessageEvent event, Bot bot, Properties properties) throws IOException, InterruptedException {
 
         Contact fromGroup = event.getGroup();
         MessageChain messages = event.getMessage();
@@ -116,5 +116,20 @@ public class GroupMessageEventHandler {
                     break;
             }
         }
+
+        if (messageContent.contains("就不能")) {
+            if (RandomNumberUtil.getRandomNumber(100) > 50) {
+                event.getGroup().sendMessage("不能");
+                Thread.sleep(2000);
+            }
+        }
+
+        if (messageContent.contains("为什么")) {
+            if (RandomNumberUtil.getRandomNumber(100) > 50) {
+                event.getGroup().sendMessage("不知道");
+                Thread.sleep(2000);
+            }
+        }
+
     }
 }
