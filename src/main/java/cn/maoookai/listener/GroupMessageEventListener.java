@@ -15,7 +15,7 @@ public class GroupMessageEventListener {
         Listener<GroupMessageEvent> groupMessageEventListener = GlobalEventChannel.INSTANCE.subscribeAlways(GroupMessageEvent.class, groupMessageEvent -> {
             try {
                 new GroupMessageEventHandler().onMessage(groupMessageEvent, bot, properties);
-            } catch (IOException e) {
+            } catch (IOException | InterruptedException e) {
                 e.printStackTrace();
             }
         });
