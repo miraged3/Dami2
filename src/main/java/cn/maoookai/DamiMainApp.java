@@ -12,6 +12,7 @@ import java.util.Properties;
 
 public class DamiMainApp {
 
+    //TODO: 日志自动归档
     public static void main(String[] args) throws Exception {
         InputStream in = new FileInputStream("config.properties");
         Properties properties = new Properties();
