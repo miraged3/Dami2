@@ -1,5 +1,6 @@
 package cn.maoookai.handler;
 
+import cn.maoookai.util.HttpGetUtil;
 import net.mamoe.mirai.Bot;
 import net.mamoe.mirai.contact.Contact;
 import net.mamoe.mirai.event.events.FriendMessageEvent;
@@ -13,5 +14,6 @@ public class FriendMessageEventHandler {
         Contact admin = bot.getFriend(Long.parseLong(properties.getProperty("qq.admin")));
         assert admin != null;
         admin.sendMessage("好友" + event.getSender().getId() + event.getSender().getNick() + "发来了消息：" + event.getMessage().contentToString());
+        event.getSender().sendMessage(HttpGetUtil.getHttpPlainText("https://chp.shadiao.app/api.php"));
     }
 }

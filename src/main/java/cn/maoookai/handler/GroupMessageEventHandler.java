@@ -2,6 +2,7 @@ package cn.maoookai.handler;
 
 import cn.maoookai.service.impl.DailyEnglishServiceImpl;
 import cn.maoookai.util.FileReadUtil;
+import cn.maoookai.util.HttpGetUtil;
 import cn.maoookai.util.ImageStitchUtil;
 import cn.maoookai.util.RandomNumberUtil;
 import net.mamoe.mirai.Bot;
@@ -86,6 +87,27 @@ public class GroupMessageEventHandler {
             fromGroup.sendMessage(dailyEnglishService.getTodayEnglish(properties.getProperty("daily.url")));
         }
 
+        if (messageContent.contains("就不能")) {
+            if (RandomNumberUtil.getRandomNumber(100) > 50) {
+                event.getGroup().sendMessage("不能");
+                Thread.sleep(2000);
+            }
+        }
+
+        if (messageContent.contains("为什么")) {
+            if (RandomNumberUtil.getRandomNumber(100) > 50) {
+                event.getGroup().sendMessage("不知道");
+                Thread.sleep(2000);
+            }
+        }
+
+        if (messageContent.equals("/fart"))
+            event.getGroup().sendMessage(HttpGetUtil.getHttpPlainText("https://chp.shadiao.app/api.php"));
+
+        if (messageContent.equals("/zuan"))
+            event.getGroup().sendMessage(HttpGetUtil.getHttpPlainText("https://zuanbot.com/api.php?level=min&lang=zh_cn"));
+
+        //Put these codes at the end of the function
         if (event.getGroup().getId() == Long.parseLong(properties.getProperty("kro.group"))) {
             switch (messageContent) {
                 case "/down":
@@ -114,20 +136,6 @@ public class GroupMessageEventHandler {
                 case "/v2":
                     event.getGroup().sendMessage(new At(event.getSender().getId()).plus(properties.getProperty("kro.v2")));
                     break;
-            }
-        }
-
-        if (messageContent.contains("就不能")) {
-            if (RandomNumberUtil.getRandomNumber(100) > 50) {
-                event.getGroup().sendMessage("不能");
-                Thread.sleep(2000);
-            }
-        }
-
-        if (messageContent.contains("为什么")) {
-            if (RandomNumberUtil.getRandomNumber(100) > 50) {
-                event.getGroup().sendMessage("不知道");
-                Thread.sleep(2000);
             }
         }
 
