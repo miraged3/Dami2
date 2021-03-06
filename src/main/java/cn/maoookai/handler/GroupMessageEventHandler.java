@@ -84,7 +84,7 @@ public class GroupMessageEventHandler {
 
         if (messageContent.equals("正能量") || messageContent.equals("每日一句") || messageContent.equals("学英语")) {
             DailyEnglishServiceImpl dailyEnglishService = new DailyEnglishServiceImpl();
-            fromGroup.sendMessage(dailyEnglishService.getTodayEnglish(properties.getProperty("daily.url")));
+            fromGroup.sendMessage(dailyEnglishService.today(properties.getProperty("daily.url")));
         }
 
         if (messageContent.contains("就不能")) {
