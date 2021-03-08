@@ -128,13 +128,19 @@ public class GroupMessageEventHandler {
                     event.getGroup().sendMessage(new At(event.getSender().getId()).plus("iOS端：\n需要联系克罗西丁获取 Apple Store 美区账号"));
                     break;
                 case "/sub":
-                    event.getGroup().sendMessage(new At(event.getSender().getId()).plus("获取哪一个订阅？\n回复指令后复制订阅节点:\n/clash\n/v2"));
+                    event.getGroup().sendMessage(new At(event.getSender().getId()).plus("获取哪一个订阅？\n回复指令后复制订阅节点:\n/clash\n/v2\n/Quant\n/QuantX"));
                     break;
                 case "/clash":
                     event.getGroup().sendMessage(new At(event.getSender().getId()).plus(properties.getProperty("kro.clash")));
                     break;
                 case "/v2":
                     event.getGroup().sendMessage(new At(event.getSender().getId()).plus(properties.getProperty("kro.v2")));
+                    break;
+                case "/quant":
+                    event.getGroup().sendMessage(new At(event.getSender().getId()).plus(properties.getProperty("kro.quant")));
+                    break;
+                case "/quantx":
+                    event.getGroup().sendMessage(new At(event.getSender().getId()).plus(properties.getProperty("kro.quantx")));
                     break;
             }
         }
