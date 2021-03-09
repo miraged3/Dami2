@@ -113,9 +113,10 @@ public class GroupMessageEventHandler {
         if (messageContent.equals("/zuan"))
             event.getGroup().sendMessage(HttpGetUtil.getHttpPlainText("https://zuanbot.com/api.php?level=min&lang=zh_cn"));
 
-        JSONObject secretCode = JSONObject.fromObject(send("https://lab.magiconch.com/api/nbnhhsh/guess", new JSONObject().accumulate("text", "hxd")));
-        event.getGroup().sendMessage(Objects.requireNonNull(getArray(secretCode)).get(RandomNumberUtil.getRandomNumber(Objects.requireNonNull(getArray(secretCode)).size())));
-
+        if (messageContent.matches("[a-zA-Z]+")) {
+            JSONObject secretCode = JSONObject.fromObject(send("https://lab.magiconch.com/api/nbnhhsh/guess", new JSONObject().accumulate("text", messageContent)));
+            event.getGroup().sendMessage(Objects.requireNonNull(getArray(secretCode)).get(RandomNumberUtil.getRandomNumber(Objects.requireNonNull(getArray(secretCode)).size())));
+        }
 
         //Put these codes at the end of the function
         if (event.getGroup().getId() == Long.parseLong(properties.getProperty("kro.group"))) {
