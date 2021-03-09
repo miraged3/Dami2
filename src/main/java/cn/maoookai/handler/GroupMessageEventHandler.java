@@ -12,12 +12,18 @@ import net.mamoe.mirai.message.data.At;
 import net.mamoe.mirai.message.data.Image;
 import net.mamoe.mirai.message.data.MessageChain;
 import net.mamoe.mirai.utils.ExternalResource;
+import net.sf.json.JSONObject;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Properties;
+
+import static cn.maoookai.util.HttpPostUtil.getArray;
+import static cn.maoookai.util.HttpPostUtil.send;
 
 public class GroupMessageEventHandler {
     static String miraiResPath = "res/";
@@ -65,7 +71,7 @@ public class GroupMessageEventHandler {
         return listResult;
     }
 
-    public void onMessage(@NotNull GroupMessageEvent event, Bot bot, Properties properties) throws IOException, InterruptedException {
+    public void onMessage(@NotNull GroupMessageEvent event, Bot bot, Properties properties) throws IOException, InterruptedException, ParseException {
 
         Contact fromGroup = event.getGroup();
         MessageChain messages = event.getMessage();
@@ -106,6 +112,10 @@ public class GroupMessageEventHandler {
 
         if (messageContent.equals("/zuan"))
             event.getGroup().sendMessage(HttpGetUtil.getHttpPlainText("https://zuanbot.com/api.php?level=min&lang=zh_cn"));
+
+        JSONObject secretCode = JSONObject.fromObject(send("https://lab.magiconch.com/api/nbnhhsh/guess", new JSONObject().accumulate("text", "hxd")));
+        event.getGroup().sendMessage(Objects.requireNonNull(getArray(secretCode)).get(RandomNumberUtil.getRandomNumber(Objects.requireNonNull(getArray(secretCode)).size())));
+
 
         //Put these codes at the end of the function
         if (event.getGroup().getId() == Long.parseLong(properties.getProperty("kro.group"))) {

@@ -8,7 +8,6 @@ import net.mamoe.mirai.contact.Contact;
 import net.mamoe.mirai.event.events.FriendMessageEvent;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -21,10 +20,10 @@ public class FriendMessageEventHandler {
         event.getSender().sendMessage(HttpGetUtil.getHttpPlainText("https://chp.shadiao.app/api.php"));
 
         //主人指令
-        if (event.getSender().getId()== admin.getId()){
-            if (message.contains("log")){
-                LogService logService =new LogServiceImpl();
-                if (message.contains(" ")){
+        if (event.getSender().getId() == admin.getId()) {
+            if (message.contains("log")) {
+                LogService logService = new LogServiceImpl();
+                if (message.contains(" ")) {
                     event.getSender().sendMessage(logService.log(Long.parseLong(message.split(" ")[1])));
                 }
             }

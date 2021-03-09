@@ -12,6 +12,6 @@ public class MainListener {
         new GroupMessageEventListener(bot, properties);
         new MemberJoinEventListener(bot, properties);
         new BotGroupPermissionChangeEventListener(bot, properties);
-        new BotJoinOrLeaveGroupEventListener(bot,properties);
+        new BotJoinOrLeaveGroupEventListener(bot, properties);
     }
 }
