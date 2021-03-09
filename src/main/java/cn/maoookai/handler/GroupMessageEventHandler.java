@@ -115,7 +115,7 @@ public class GroupMessageEventHandler {
 
         if (messageContent.matches("[a-zA-Z]+")) {
             JSONObject secretCode = JSONObject.fromObject(send("https://lab.magiconch.com/api/nbnhhsh/guess", new JSONObject().accumulate("text", messageContent)));
-            event.getGroup().sendMessage(Objects.requireNonNull(getArray(secretCode)).get(RandomNumberUtil.getRandomNumber(Objects.requireNonNull(getArray(secretCode)).size())));
+            event.getGroup().sendMessage(Objects.requireNonNull(getArray(secretCode, messageContent)).get(RandomNumberUtil.getRandomNumber(Objects.requireNonNull(getArray(secretCode, messageContent)).size())));
         }
 
         //Put these codes at the end of the function

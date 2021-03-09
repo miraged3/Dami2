@@ -43,9 +43,9 @@ public class HttpPostUtil {
         return stringBuilder.toString();
     }
 
-    public static List<String> getArray(JSONObject secretCode) {
+    public static List<String> getArray(JSONObject secretCode, String message) {
 
-        if (secretCode.containsKey("trans")) {
+        if (secretCode.containsKey("trans") && message.equals(secretCode.getString("name"))) {
             JSONArray array = secretCode.getJSONArray("trans");
             return IntStream.range(0, array.size()).mapToObj(array :: getString).collect(Collectors.toList());
         } else return null;
