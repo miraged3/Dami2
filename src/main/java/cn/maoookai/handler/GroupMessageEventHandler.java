@@ -95,15 +95,15 @@ public class GroupMessageEventHandler {
 
         if (messageContent.contains("就不能")) {
             if (RandomNumberUtil.getRandomNumber(100) > 50) {
-                event.getGroup().sendMessage("不能");
                 Thread.sleep(2000);
+                event.getGroup().sendMessage("不能");
             }
         }
 
         if (messageContent.contains("为什么")) {
             if (RandomNumberUtil.getRandomNumber(100) > 50) {
-                event.getGroup().sendMessage("不知道");
                 Thread.sleep(2000);
+                event.getGroup().sendMessage("不知道");
             }
         }
 
@@ -136,7 +136,7 @@ public class GroupMessageEventHandler {
                 case "/ios":
                 case "/iOS":
                 case "/IOS":
-                    event.getGroup().sendMessage(new At(event.getSender().getId()).plus("iOS端：\n需要联系克罗西丁获取 Apple Store 美区账号"));
+                    event.getGroup().sendMessage(new At(event.getSender().getId()).plus("iOS端：\n需要联系克罗西丁获取 App Store 美区账号"));
                     break;
                 case "/sub":
                     event.getGroup().sendMessage(new At(event.getSender().getId()).plus("获取哪一个订阅？\n回复指令后复制订阅节点:\n/clash\n/v2\n/Quant\n/QuantX"));
