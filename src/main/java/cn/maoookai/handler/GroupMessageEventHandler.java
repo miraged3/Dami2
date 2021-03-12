@@ -26,6 +26,8 @@ import static cn.maoookai.util.HttpPostUtil.getArray;
 import static cn.maoookai.util.HttpPostUtil.send;
 
 public class GroupMessageEventHandler {
+
+    //TODO:性能优化
     static String miraiResPath = "res/";
     static ArrayList<File> rSet;
     static ArrayList<File> srSet;
