@@ -12,8 +12,4 @@ public class DailyEnglishServiceImpl implements DailyEnglishService {
         return getDailySentence.getString("dateline") + " 每日一句\n" + getDailySentence.getString("content") + '\n' + getDailySentence.getString("note");
     }
 
-    @Override
-    public String history() {
-        return null;
-    }
 }

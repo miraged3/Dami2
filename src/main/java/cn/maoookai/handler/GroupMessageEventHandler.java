@@ -27,7 +27,6 @@ import static cn.maoookai.util.HttpPostUtil.send;
 
 public class GroupMessageEventHandler {
 
-    //TODO:性能优化
     static String miraiResPath = "res/";
     static ArrayList<File> rSet;
     static ArrayList<File> srSet;
@@ -59,7 +58,6 @@ public class GroupMessageEventHandler {
         return summonResult;
     }
 
-    //TODO: 式神图片优化
     private File summonOne() {
         return summon();
     }
