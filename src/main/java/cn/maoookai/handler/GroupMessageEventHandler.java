@@ -118,43 +118,5 @@ public class GroupMessageEventHandler {
             event.getGroup().sendMessage(Objects.requireNonNull(getArray(secretCode, messageContent)).get(RandomNumberUtil.getRandomNumber(Objects.requireNonNull(getArray(secretCode, messageContent)).size())));
         }
 
-        //Put these codes at the end of the function
-        if (event.getGroup().getId() == Long.parseLong(properties.getProperty("kro.group"))) {
-            switch (messageContent) {
-                case "/down":
-                    event.getGroup().sendMessage(new At(event.getSender().getId()).plus("选择你的平台：\n/and：Android端\n/win：Windows端\n/mac：macOS端\n/ios：iOS端"));
-                    break;
-                case "/and":
-                    event.getGroup().sendMessage(new At(event.getSender().getId()).plus("Android端：\nClash下载：").plus(properties.getProperty("kro.androidClash")).plus("\nV2R下载：").plus(properties.getProperty("kro.androidV2")));
-                    break;
-                case "/win":
-                    event.getGroup().sendMessage(new At(event.getSender().getId()).plus("Windows端：\nClash下载：").plus(properties.getProperty("kro.winClash")).plus("\nV2R下载：").plus(properties.getProperty("kro.winV2")));
-                    break;
-                case "/mac":
-                    event.getGroup().sendMessage(new At(event.getSender().getId()).plus("macOS端：\nClash下载：").plus(properties.getProperty("kro.macClash")));
-                    break;
-                case "/ios":
-                case "/iOS":
-                case "/IOS":
-                    event.getGroup().sendMessage(new At(event.getSender().getId()).plus("iOS端：\n需要联系克罗西丁获取 App Store 美区账号"));
-                    break;
-                case "/sub":
-                    event.getGroup().sendMessage(new At(event.getSender().getId()).plus("获取哪一个订阅？\n回复指令后复制订阅节点:\n/clash\n/v2\n/Quant\n/QuantX"));
-                    break;
-                case "/clash":
-                    event.getGroup().sendMessage(new At(event.getSender().getId()).plus(properties.getProperty("kro.clash")));
-                    break;
-                case "/v2":
-                    event.getGroup().sendMessage(new At(event.getSender().getId()).plus(properties.getProperty("kro.v2")));
-                    break;
-                case "/quant":
-                    event.getGroup().sendMessage(new At(event.getSender().getId()).plus(properties.getProperty("kro.quant")));
-                    break;
-                case "/quantx":
-                    event.getGroup().sendMessage(new At(event.getSender().getId()).plus(properties.getProperty("kro.quantx")));
-                    break;
-            }
-        }
-
     }
 }
