@@ -26,10 +26,18 @@ public class DamiMainApp {
         Bot dami = BotFactory.INSTANCE.newBot(Long.parseLong(properties.getProperty("qq.account")), properties.getProperty("qq.password"), new BotConfiguration() {{
             setProtocol(MiraiProtocol.ANDROID_WATCH);
             fileBasedDeviceInfo();
-            File oldLog = new File("mirai.log");
+            File logDir = new File("log/");
+            if (!logDir.exists() && !logDir.isDirectory()) {
+                System.out.println("未发现日志文件夹，正在创建");
+                if (logDir.mkdir())
+                    System.out.println("已创建log文件夹");
+                else
+                    System.out.println("创建失败...请检查权限");
+            }
+            File oldLog = new File("log/mirai.log");
             if (oldLog.exists())
                 System.out.println("Current log directory is " + oldLog.getAbsolutePath());
-            redirectBotLogToFile(new File("mirai.log"));
+            redirectBotLogToFile(new File("log/mirai.log"));
         }});
         dami.login();
         new MainListener().initListener(dami, properties);
