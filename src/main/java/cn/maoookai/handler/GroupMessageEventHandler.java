@@ -105,7 +105,7 @@ public class GroupMessageEventHandler {
         }
 
         if (messageContent.contains("为什么")) {
-            if (RandomNumberUtil.getRandomNumber(100) > 90) {
+            if (RandomNumberUtil.getRandomNumber(100) > 95) {
                 Thread.sleep(5000);
                 event.getGroup().sendMessage("因为，" + HttpGetUtil.getHttpPlainText("https://chp.shadiao.app/api.php"));
             }
