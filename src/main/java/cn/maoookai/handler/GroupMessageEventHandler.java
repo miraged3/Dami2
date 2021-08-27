@@ -125,7 +125,7 @@ public class GroupMessageEventHandler {
             return;
         }
 
-        if (RandomNumberUtil.getRandomNumber(1000) < 5) {
+        if (RandomNumberUtil.getRandomNumber(1000) < 2) {
             Thread.sleep(5000);
             event.getGroup().sendMessage(HttpGetUtil.getHttpPlainText("https://chp.shadiao.app/api.php"));
         }
