@@ -130,8 +130,10 @@ public class GroupMessageEventHandler {
             event.getGroup().sendMessage(HttpGetUtil.getHttpPlainText("https://chp.shadiao.app/api.php"));
         }
 
-
-
+        if (RandomNumberUtil.getRandomNumber(1000) < 1) {
+            Thread.sleep(3000);
+            event.getGroup().sendMessage(messageContent);
+        }
 
     }
 }
