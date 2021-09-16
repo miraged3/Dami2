@@ -71,7 +71,7 @@ public class GroupMessageEventHandler {
         return listResult;
     }
 
-    public void onMessage(@NotNull GroupMessageEvent event, Bot bot, Properties properties) throws IOException, InterruptedException, ParseException {
+    public void onMessage(@NotNull GroupMessageEvent event, Properties properties) throws IOException, InterruptedException, ParseException {
 
         Contact fromGroup = event.getGroup();
         MessageChain messages = event.getMessage();
@@ -112,6 +112,14 @@ public class GroupMessageEventHandler {
             return;
         }
 
+        if (messageContent.endsWith("吗？") || messageContent.endsWith("吗") || messageContent.endsWith("吗?")) {
+            if (RandomNumberUtil.getRandomNumber(100) > 50) {
+                Thread.sleep(4000);
+                event.getGroup().sendMessage(messageContent.split("吗")[0] + "！");
+            }
+            return;
+        }
+
         for (String curse : properties.getProperty("curse").split(",")) {
             if (messageContent.contains(curse)) {
                 event.getGroup().sendMessage(HttpGetUtil.getHttpPlainText("https://zuanbot.com/api.php?level=min&lang=zh_cn"));
@@ -129,8 +137,6 @@ public class GroupMessageEventHandler {
             Thread.sleep(5000);
             event.getGroup().sendMessage(HttpGetUtil.getHttpPlainText("https://chp.shadiao.app/api.php"));
         }
-
-
 
 
     }
