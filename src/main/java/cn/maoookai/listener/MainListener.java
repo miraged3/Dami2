@@ -9,7 +9,7 @@ public class MainListener {
         new BotOfflineEventListener(bot, properties);
         new FriendMessageEventListener(bot, properties);
         new StrangerMessageEventListener(bot, properties);
-        new GroupMessageEventListener(bot, properties);
+        new GroupMessageEventListener(properties);
         new MemberJoinEventListener(bot, properties);
         new BotGroupPermissionChangeEventListener(bot, properties);
         new BotJoinOrLeaveGroupEventListener(bot, properties);
