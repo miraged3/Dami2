@@ -4,8 +4,6 @@
 
 无情的阴阳师抽卡bot
 
-所有功能都在设计与开发中，将开发的实时进度上传至Github~~刷提交记录~~
-
 ## 使用
 
 ### 1.环境配置
@@ -24,6 +22,4 @@ Java 11+
 
 ### 3.启动大米
 
-Windows：StartDami.bat
-
-Linux ：./StartDami.sh
+建议在Linux上运行，使用screen命令新建窗口，即可实现后台运行
