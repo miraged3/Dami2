@@ -5,7 +5,6 @@ import cn.maoookai.util.FileReadUtil;
 import cn.maoookai.util.HttpGetUtil;
 import cn.maoookai.util.ImageStitchUtil;
 import cn.maoookai.util.RandomNumberUtil;
-import net.mamoe.mirai.Bot;
 import net.mamoe.mirai.contact.Contact;
 import net.mamoe.mirai.event.events.GroupMessageEvent;
 import net.mamoe.mirai.message.data.At;
@@ -98,22 +97,22 @@ public class GroupMessageEventHandler {
 
         if (messageContent.contains("就不能")) {
             if (RandomNumberUtil.getRandomNumber(100) > 50) {
-                Thread.sleep(5000);
+                Thread.sleep(4000);
                 event.getGroup().sendMessage("不能");
             }
             return;
         }
 
         if (messageContent.contains("为什么")) {
-            if (RandomNumberUtil.getRandomNumber(100) > 95) {
-                Thread.sleep(5000);
+            if (RandomNumberUtil.getRandomNumber(100) > 10) {
+                Thread.sleep(4000);
                 event.getGroup().sendMessage("因为，" + HttpGetUtil.getHttpPlainText("https://chp.shadiao.app/api.php"));
             }
             return;
         }
 
         if (messageContent.endsWith("吗？") || messageContent.endsWith("吗") || messageContent.endsWith("吗?")) {
-            if (RandomNumberUtil.getRandomNumber(100) > 50) {
+            if (RandomNumberUtil.getRandomNumber(100) > 20) {
                 Thread.sleep(4000);
                 event.getGroup().sendMessage(messageContent.split("吗")[0] + "！");
             }
@@ -133,8 +132,8 @@ public class GroupMessageEventHandler {
             return;
         }
 
-        if (RandomNumberUtil.getRandomNumber(1000) < 5) {
-            Thread.sleep(5000);
+        if (RandomNumberUtil.getRandomNumber(1000) < 2) {
+            Thread.sleep(4000);
             event.getGroup().sendMessage(HttpGetUtil.getHttpPlainText("https://chp.shadiao.app/api.php"));
         }
 
