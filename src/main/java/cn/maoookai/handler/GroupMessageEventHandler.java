@@ -104,7 +104,7 @@ public class GroupMessageEventHandler {
         }
 
         if (messageContent.contains("为什么")) {
-            if (RandomNumberUtil.getRandomNumber(100) > 95) {
+            if (RandomNumberUtil.getRandomNumber(100) > 10) {
                 Thread.sleep(4000);
                 event.getGroup().sendMessage("因为，" + HttpGetUtil.getHttpPlainText("https://chp.shadiao.app/api.php"));
             }
@@ -112,7 +112,7 @@ public class GroupMessageEventHandler {
         }
 
         if (messageContent.endsWith("吗？") || messageContent.endsWith("吗") || messageContent.endsWith("吗?")) {
-            if (RandomNumberUtil.getRandomNumber(100) > 98) {
+            if (RandomNumberUtil.getRandomNumber(100) > 20) {
                 Thread.sleep(4000);
                 event.getGroup().sendMessage(messageContent.split("吗")[0] + "！");
             }
@@ -132,7 +132,7 @@ public class GroupMessageEventHandler {
             return;
         }
 
-        if (RandomNumberUtil.getRandomNumber(1000) < 5) {
+        if (RandomNumberUtil.getRandomNumber(1000) < 2) {
             Thread.sleep(4000);
             event.getGroup().sendMessage(HttpGetUtil.getHttpPlainText("https://chp.shadiao.app/api.php"));
         }
