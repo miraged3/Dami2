@@ -12,12 +12,20 @@ import net.mamoe.mirai.message.data.Image;
 import net.mamoe.mirai.message.data.MessageChain;
 import net.mamoe.mirai.utils.ExternalResource;
 import net.sf.json.JSONObject;
+import org.apache.commons.io.FileUtils;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Objects;
 import java.util.Properties;
 
@@ -95,6 +103,28 @@ public class GroupMessageEventHandler {
             return;
         }
 
+        if (messageContent.startsWith("图片")) {
+            HttpClient httpClient = HttpClients.createDefault();
+            HttpPost httpPost = new HttpPost(properties.getProperty("address"));
+            String keyword = messageContent.replace("图片", "");
+            String raw = "{\"keyword\":\"" + keyword + "\"}";
+            StringEntity stringEntity = new StringEntity(raw, "UTF-8");
+            stringEntity.setContentType("application/json");
+            httpPost.setEntity(stringEntity);
+            System.out.println(keyword);
+            System.out.println(EntityUtils.toString(stringEntity));
+            HttpResponse httpResponse = httpClient.execute(httpPost);
+            com.alibaba.fastjson.JSONObject jsonObject = com.alibaba.fastjson.JSONObject.parseObject(EntityUtils.toString(httpResponse.getEntity()));
+            String base64 = jsonObject.getString("image");
+            System.out.println(base64);
+            File file = new File("img");
+            byte[] decodedBytes = Base64.getDecoder().decode(base64);
+            FileUtils.writeByteArrayToFile(file, decodedBytes);
+            Image baiduImage = fromGroup.uploadImage(ExternalResource.create(file));
+            fromGroup.sendMessage(new At(event.getSender().getId()).plus("你要找的图片是：").plus(baiduImage));
+            return;
+        }
+
         if (messageContent.contains("就不能")) {
             if (RandomNumberUtil.getRandomNumber(100) < 5) {
                 Thread.sleep(4000);
@@ -129,6 +159,25 @@ public class GroupMessageEventHandler {
         if (messageContent.matches("[a-zA-Z]+") && RandomNumberUtil.getRandomNumber(100) > 50) {
             JSONObject secretCode = JSONObject.fromObject(send("https://lab.magiconch.com/api/nbnhhsh/guess", new JSONObject().accumulate("text", messageContent)));
             event.getGroup().sendMessage(Objects.requireNonNull(getArray(secretCode, messageContent)).get(RandomNumberUtil.getRandomNumber(Objects.requireNonNull(getArray(secretCode, messageContent)).size())));
+            return;
+        }
+
+        if (RandomNumberUtil.getRandomNumber(100) > 98) {
+            HttpClient httpClient = HttpClients.createDefault();
+            HttpPost httpPost = new HttpPost(properties.getProperty("address"));
+            String raw = "{\"keyword\":\"" + messageContent + "\"}";
+            StringEntity stringEntity = new StringEntity(raw, "UTF-8");
+            stringEntity.setContentType("application/json");
+            httpPost.setEntity(stringEntity);
+            HttpResponse httpResponse = httpClient.execute(httpPost);
+            com.alibaba.fastjson.JSONObject jsonObject = com.alibaba.fastjson.JSONObject.parseObject(EntityUtils.toString(httpResponse.getEntity()));
+            String base64 = jsonObject.getString("image");
+            System.out.println(base64);
+            File file = new File("img");
+            byte[] decodedBytes = Base64.getDecoder().decode(base64);
+            FileUtils.writeByteArrayToFile(file, decodedBytes);
+            Image baiduImage = fromGroup.uploadImage(ExternalResource.create(file));
+            fromGroup.sendMessage(new At(event.getSender().getId()).plus(messageContent).plus(baiduImage));
             return;
         }
 
