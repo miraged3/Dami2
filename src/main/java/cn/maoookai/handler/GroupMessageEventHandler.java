@@ -10,6 +10,7 @@ import net.mamoe.mirai.event.events.GroupMessageEvent;
 import net.mamoe.mirai.message.data.At;
 import net.mamoe.mirai.message.data.Image;
 import net.mamoe.mirai.message.data.MessageChain;
+import net.mamoe.mirai.message.data.PlainText;
 import net.mamoe.mirai.utils.ExternalResource;
 import net.sf.json.JSONObject;
 import org.apache.commons.io.FileUtils;
@@ -112,16 +113,14 @@ public class GroupMessageEventHandler {
             stringEntity.setContentType("application/json");
             httpPost.setEntity(stringEntity);
             System.out.println(keyword);
-            System.out.println(EntityUtils.toString(stringEntity));
             HttpResponse httpResponse = httpClient.execute(httpPost);
             com.alibaba.fastjson.JSONObject jsonObject = com.alibaba.fastjson.JSONObject.parseObject(EntityUtils.toString(httpResponse.getEntity()));
             String base64 = jsonObject.getString("image");
-            System.out.println(base64);
             File file = new File("img");
             byte[] decodedBytes = Base64.getDecoder().decode(base64);
             FileUtils.writeByteArrayToFile(file, decodedBytes);
             Image baiduImage = fromGroup.uploadImage(ExternalResource.create(file));
-            fromGroup.sendMessage(new At(event.getSender().getId()).plus("你要找的图片是：").plus(baiduImage));
+            fromGroup.sendMessage(new At(event.getSender().getId()).plus("你要的" + keyword + "：").plus(baiduImage));
             return;
         }
 
@@ -172,12 +171,11 @@ public class GroupMessageEventHandler {
             HttpResponse httpResponse = httpClient.execute(httpPost);
             com.alibaba.fastjson.JSONObject jsonObject = com.alibaba.fastjson.JSONObject.parseObject(EntityUtils.toString(httpResponse.getEntity()));
             String base64 = jsonObject.getString("image");
-            System.out.println(base64);
             File file = new File("img");
             byte[] decodedBytes = Base64.getDecoder().decode(base64);
             FileUtils.writeByteArrayToFile(file, decodedBytes);
             Image baiduImage = fromGroup.uploadImage(ExternalResource.create(file));
-            fromGroup.sendMessage(new At(event.getSender().getId()).plus(messageContent).plus(baiduImage));
+            fromGroup.sendMessage(new PlainText(messageContent + "？").plus(baiduImage));
             return;
         }
 
