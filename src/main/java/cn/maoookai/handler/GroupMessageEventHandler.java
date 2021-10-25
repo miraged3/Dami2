@@ -161,7 +161,7 @@ public class GroupMessageEventHandler {
             return;
         }
 
-        if (RandomNumberUtil.getRandomNumber(100) > 98) {
+        if (RandomNumberUtil.getRandomNumber(1000) > 997) {
             HttpClient httpClient = HttpClients.createDefault();
             HttpPost httpPost = new HttpPost(properties.getProperty("address"));
             String raw = "{\"keyword\":\"" + messageContent + "\"}";
