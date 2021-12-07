@@ -106,7 +106,7 @@ public class GroupMessageEventHandler {
 
         if (messageContent.startsWith("图片")) {
             HttpClient httpClient = HttpClients.createDefault();
-            HttpPost httpPost = new HttpPost(properties.getProperty("address"));
+            HttpPost httpPost = new HttpPost(properties.getProperty("imageAddress"));
             String keyword = messageContent.replace("图片", "");
             String raw = "{\"keyword\":\"" + keyword + "\"}";
             StringEntity stringEntity = new StringEntity(raw, "UTF-8");
@@ -127,15 +127,7 @@ public class GroupMessageEventHandler {
         if (messageContent.contains("就不能")) {
             if (RandomNumberUtil.getRandomNumber(100) < 5) {
                 Thread.sleep(4000);
-                event.getGroup().sendMessage("不能");
-            }
-            return;
-        }
-
-        if (messageContent.contains("为什么")) {
-            if (RandomNumberUtil.getRandomNumber(100) < 3) {
-                Thread.sleep(4000);
-                event.getGroup().sendMessage("因为，" + HttpGetUtil.getHttpPlainText("https://chp.shadiao.app/api.php"));
+                fromGroup.sendMessage("不能");
             }
             return;
         }
@@ -143,21 +135,21 @@ public class GroupMessageEventHandler {
         if (messageContent.endsWith("吗？") || messageContent.endsWith("吗") || messageContent.endsWith("吗?")) {
             if (RandomNumberUtil.getRandomNumber(100) < 3) {
                 Thread.sleep(4000);
-                event.getGroup().sendMessage(messageContent.split("吗")[0] + "！");
+                fromGroup.sendMessage(messageContent.split("吗")[0] + "！");
             }
             return;
         }
 
         for (String curse : properties.getProperty("curse").split(",")) {
             if (messageContent.contains(curse)) {
-                event.getGroup().sendMessage(HttpGetUtil.getHttpPlainText("https://zuanbot.com/api.php?level=min&lang=zh_cn"));
+                fromGroup.sendMessage(HttpGetUtil.getHttpPlainText("https://zuanbot.com/api.php?level=min&lang=zh_cn"));
                 return;
             }
         }
 
         if (messageContent.matches("[a-zA-Z]+") && RandomNumberUtil.getRandomNumber(100) > 50) {
             JSONObject secretCode = JSONObject.fromObject(send("https://lab.magiconch.com/api/nbnhhsh/guess", new JSONObject().accumulate("text", messageContent)));
-            event.getGroup().sendMessage(Objects.requireNonNull(getArray(secretCode, messageContent)).get(RandomNumberUtil.getRandomNumber(Objects.requireNonNull(getArray(secretCode, messageContent)).size())));
+            fromGroup.sendMessage(Objects.requireNonNull(getArray(secretCode, messageContent)).get(RandomNumberUtil.getRandomNumber(Objects.requireNonNull(getArray(secretCode, messageContent)).size())));
             return;
         }
 
@@ -181,14 +173,23 @@ public class GroupMessageEventHandler {
 
         if (RandomNumberUtil.getRandomNumber(1000) < 1) {
             if (RandomNumberUtil.getRandomNumber(1) > 0) {
-                Thread.sleep(4000);
-                event.getGroup().sendMessage(HttpGetUtil.getHttpPlainText("https://chp.shadiao.app/api.php"));
-            } else {
+                HttpClient httpClient = HttpClients.createDefault();
+                HttpPost httpPost = new HttpPost(properties.getProperty("yinAddress"));
+                String raw = "{\"message\":\"" + messageContent + "\"}";
+                StringEntity stringEntity = new StringEntity(raw, "UTF-8");
+                stringEntity.setContentType("application/json");
+                httpPost.setEntity(stringEntity);
+                HttpResponse httpResponse = httpClient.execute(httpPost);
+                com.alibaba.fastjson.JSONObject jsonObject = com.alibaba.fastjson.JSONObject.parseObject(EntityUtils.toString(httpResponse.getEntity()));
+                String yinglish = jsonObject.getString("yinglish");
+                fromGroup.sendMessage(yinglish);
+            } else if (RandomNumberUtil.getRandomNumber(1) > 0) {
                 Thread.sleep(3000);
-                event.getGroup().sendMessage(messageContent);
+                fromGroup.sendMessage(messageContent);
+            } else {
+                Thread.sleep(4000);
+                fromGroup.sendMessage(HttpGetUtil.getHttpPlainText("https://chp.shadiao.app/api.php"));
             }
         }
-
-
     }
 }
