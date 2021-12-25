@@ -88,7 +88,7 @@ public class GroupMessageEventHandler {
 
         if (messageContent.equals("抽卡")) {
             RandomAccessFile randomAccessFile = new RandomAccessFile(summonOne(), "r");
-            Image summonImage = fromGroup.uploadImage(ExternalResource.create(randomAccessFile, "png", true));
+            Image summonImage = fromGroup.uploadImage(ExternalResource.create(randomAccessFile, "jpg", true));
             fromGroup.sendMessage(new At(event.getSender().getId()).plus("你召唤出了：").plus(summonImage));
             return;
         }
@@ -96,7 +96,7 @@ public class GroupMessageEventHandler {
             ArrayList<File> result = summonTenTimes();
             File pic = ImageStitchUtil.bufferedToFile(result);
             RandomAccessFile randomAccessFile = new RandomAccessFile(pic, "r");
-            Image summonImage = fromGroup.uploadImage(ExternalResource.create(randomAccessFile, "png", true));
+            Image summonImage = fromGroup.uploadImage(ExternalResource.create(randomAccessFile, "jpg", true));
             fromGroup.sendMessage(new At(event.getSender().getId()).plus("你召唤出了：").plus(summonImage));
             return;
         }
