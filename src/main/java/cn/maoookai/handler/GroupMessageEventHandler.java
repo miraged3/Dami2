@@ -144,12 +144,12 @@ public class GroupMessageEventHandler {
             return;
         }
 
-        for (String curse : properties.getProperty("curse").split(",")) {
-            if (messageContent.contains(curse)) {
-                fromGroup.sendMessage(HttpGetUtil.getHttpPlainText("https://zuanbot.com/api.php?level=min&lang=zh_cn"));
-                return;
-            }
-        }
+//        for (String curse : properties.getProperty("curse").split(",")) {
+//            if (messageContent.contains(curse)) {
+//                fromGroup.sendMessage(HttpGetUtil.getHttpPlainText("https://zuanbot.com/api.php?level=min&lang=zh_cn"));
+//                return;
+//            }
+//        }
 
         if (messageContent.matches("[a-zA-Z]+") && RandomNumberUtil.getRandomNumber(100) > 50) {
             JSONObject secretCode = JSONObject.fromObject(send("https://lab.magiconch.com/api/nbnhhsh/guess", new JSONObject().accumulate("text", messageContent)));
