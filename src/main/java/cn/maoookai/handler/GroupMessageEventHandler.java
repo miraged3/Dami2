@@ -110,7 +110,7 @@ public class GroupMessageEventHandler {
         if (messageContent.startsWith("图片")) {
             HttpClient httpClient = HttpClients.createDefault();
             HttpPost httpPost = new HttpPost(properties.getProperty("imageAddress"));
-            String keyword = messageContent.replace("图片", "");
+            String keyword = messageContent.substring(2);
             String raw = "{\"keyword\":\"" + keyword + "\"}";
             StringEntity stringEntity = new StringEntity(raw, "UTF-8");
             stringEntity.setContentType("application/json");
@@ -136,6 +136,19 @@ public class GroupMessageEventHandler {
             return;
         }
 
+        if (messageContent.startsWith(".")) {
+            HttpClient httpClient = HttpClients.createDefault();
+            HttpPost httpPost = new HttpPost(properties.getProperty("yinAddress"));
+            String raw = "{\"message\":\"" + messageContent.substring(1) + "\"}";
+            StringEntity stringEntity = new StringEntity(raw, "UTF-8");
+            stringEntity.setContentType("application/json");
+            httpPost.setEntity(stringEntity);
+            HttpResponse httpResponse = httpClient.execute(httpPost);
+            com.alibaba.fastjson.JSONObject jsonObject = com.alibaba.fastjson.JSONObject.parseObject(EntityUtils.toString(httpResponse.getEntity()));
+            String yinglish = jsonObject.getString("yinglish");
+            fromGroup.sendMessage(yinglish);
+        }
+
         if (messageContent.endsWith("吗？") || messageContent.endsWith("吗") || messageContent.endsWith("吗?")) {
             if (RandomNumberUtil.getRandomNumber(100) < 3) {
                 Thread.sleep(4000);
@@ -143,13 +156,6 @@ public class GroupMessageEventHandler {
             }
             return;
         }
-
-//        for (String curse : properties.getProperty("curse").split(",")) {
-//            if (messageContent.contains(curse)) {
-//                fromGroup.sendMessage(HttpGetUtil.getHttpPlainText("https://zuanbot.com/api.php?level=min&lang=zh_cn"));
-//                return;
-//            }
-//        }
 
         if (messageContent.matches("[a-zA-Z]+") && RandomNumberUtil.getRandomNumber(100) > 50) {
             JSONObject secretCode = JSONObject.fromObject(send("https://lab.magiconch.com/api/nbnhhsh/guess", new JSONObject().accumulate("text", messageContent)));
