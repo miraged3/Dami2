@@ -205,9 +205,6 @@ public class GroupMessageEventHandler {
             } else if (RandomNumberUtil.getRandomNumber(1) > 0) {
                 Thread.sleep(3000);
                 fromGroup.sendMessage(messageContent);
-            } else {
-                Thread.sleep(4000);
-                fromGroup.sendMessage(HttpGetUtil.getHttpPlainText("https://chp.shadiao.app/api.php"));
             }
         }
     }
