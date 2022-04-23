@@ -88,7 +88,9 @@ public class GroupMessageEventHandler {
 
         if (messageContent.equals("抽卡")) {
             RandomAccessFile randomAccessFile = new RandomAccessFile(summonOne(), "r");
-            Image summonImage = fromGroup.uploadImage(ExternalResource.create(randomAccessFile, "jpg", true));
+            ExternalResource jpg = ExternalResource.create(randomAccessFile, "jpg", true);
+            Image summonImage = fromGroup.uploadImage(jpg);
+            jpg.close();
             fromGroup.sendMessage(new At(event.getSender().getId()).plus("你召唤出了：").plus(summonImage));
             return;
         }
@@ -96,7 +98,9 @@ public class GroupMessageEventHandler {
             ArrayList<File> result = summonTenTimes();
             File pic = ImageStitchUtil.bufferedToFile(result);
             RandomAccessFile randomAccessFile = new RandomAccessFile(pic, "r");
-            Image summonImage = fromGroup.uploadImage(ExternalResource.create(randomAccessFile, "jpg", true));
+            ExternalResource jpg = ExternalResource.create(randomAccessFile, "jpg", true);
+            Image summonImage = fromGroup.uploadImage(jpg);
+            jpg.close();
             fromGroup.sendMessage(new At(event.getSender().getId()).plus("你召唤出了：").plus(summonImage));
             return;
         }
@@ -123,7 +127,9 @@ public class GroupMessageEventHandler {
             byte[] decodedBytes = Base64.getDecoder().decode(base64);
             FileUtils.writeByteArrayToFile(file, decodedBytes);
             RandomAccessFile randomAccessFile = new RandomAccessFile(file, "r");
-            Image baiduImage = fromGroup.uploadImage(ExternalResource.create(randomAccessFile, "jpg", true));
+            ExternalResource jpg = ExternalResource.create(randomAccessFile, "jpg", true);
+            Image baiduImage = fromGroup.uploadImage(jpg);
+            jpg.close();
             fromGroup.sendMessage(new At(event.getSender().getId()).plus("你要的" + keyword + "：").plus(baiduImage));
             return;
         }
@@ -177,7 +183,9 @@ public class GroupMessageEventHandler {
             byte[] decodedBytes = Base64.getDecoder().decode(base64);
             FileUtils.writeByteArrayToFile(file, decodedBytes);
             RandomAccessFile randomAccessFile = new RandomAccessFile(file, "r");
-            Image baiduImage = fromGroup.uploadImage(ExternalResource.create(randomAccessFile, "jpg", true));
+            ExternalResource jpg = ExternalResource.create(randomAccessFile, "jpg", true);
+            Image baiduImage = fromGroup.uploadImage(jpg);
+            jpg.close();
             fromGroup.sendMessage(new PlainText(messageContent + "？").plus(baiduImage));
             return;
         }
