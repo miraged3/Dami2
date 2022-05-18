@@ -27,5 +27,5 @@ Java 11+
 
 This project is being supported by JetBrains.  
 JetBrains supports non-commercial open source projects by providing core project contributors with a set of
-best-in-class developer tools free of charge. Click [here](https://jb.gg/OpenSourceSupport) to learn more.
-![JetBrains Logo (Main) logo](https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.png)
+best-in-class developer tools free of charge. Click [here](https://jb.gg/OpenSourceSupport) to learn more.  
+![JetBrains Black Box Logo logo](https://resources.jetbrains.com/storage/products/company/brand/logos/jb_square.svg)
