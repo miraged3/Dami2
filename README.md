@@ -28,4 +28,4 @@ Java 11+
 This project is being supported by JetBrains IntelliJ IDEA and other dev tools.  
 JetBrains supports non-commercial open source projects by providing core project contributors with a set of
 best-in-class developer tools free of charge. Click [here](https://jb.gg/OpenSourceSupport) to learn more.  
-![IntelliJ IDEA logo](https://resources.jetbrains.com/storage/products/company/brand/logos/IntelliJ_IDEA.svg)
+![JetBrains Black Box Logo logo](https://resources.jetbrains.com/storage/products/company/brand/logos/jb_square.svg)
