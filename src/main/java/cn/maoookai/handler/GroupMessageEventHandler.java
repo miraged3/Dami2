@@ -190,7 +190,7 @@ public class GroupMessageEventHandler {
             return;
         }
 
-        if (RandomNumberUtil.getRandomNumber(1000) < 1) {
+        if (RandomNumberUtil.getRandomNumber(1000) < 2) {
             if (RandomNumberUtil.getRandomNumber(2) > 1) {
                 HttpClient httpClient = HttpClients.createDefault();
                 HttpPost httpPost = new HttpPost(properties.getProperty("yinAddress"));
