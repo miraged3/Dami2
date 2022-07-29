@@ -191,7 +191,7 @@ public class GroupMessageEventHandler {
         }
 
         if (RandomNumberUtil.getRandomNumber(1000) < 1) {
-            if (RandomNumberUtil.getRandomNumber(1) > 0) {
+            if (RandomNumberUtil.getRandomNumber(2) > 1) {
                 HttpClient httpClient = HttpClients.createDefault();
                 HttpPost httpPost = new HttpPost(properties.getProperty("yinAddress"));
                 String raw = "{\"message\":\"" + messageContent + "\"}";
@@ -202,7 +202,7 @@ public class GroupMessageEventHandler {
                 com.alibaba.fastjson.JSONObject jsonObject = com.alibaba.fastjson.JSONObject.parseObject(EntityUtils.toString(httpResponse.getEntity()));
                 String yinglish = jsonObject.getString("yinglish");
                 fromGroup.sendMessage(yinglish);
-            } else if (RandomNumberUtil.getRandomNumber(1) > 0) {
+            } else {
                 Thread.sleep(3000);
                 fromGroup.sendMessage(messageContent);
             }

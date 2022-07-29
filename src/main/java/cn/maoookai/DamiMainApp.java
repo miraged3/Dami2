@@ -24,7 +24,7 @@ public class DamiMainApp {
         ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
         executorService.scheduleAtFixedRate(logFileScheduler, 0, 24, TimeUnit.HOURS);
         Bot dami = BotFactory.INSTANCE.newBot(Long.parseLong(properties.getProperty("qq.account")), properties.getProperty("qq.password"), new BotConfiguration() {{
-            setProtocol(MiraiProtocol.ANDROID_WATCH);
+            setProtocol(MiraiProtocol.ANDROID_PAD);
             fileBasedDeviceInfo();
             File logDir = new File("log/");
             if (!logDir.exists() && !logDir.isDirectory()) {
