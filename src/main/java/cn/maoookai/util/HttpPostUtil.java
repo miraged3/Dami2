@@ -47,7 +47,7 @@ public class HttpPostUtil {
 
         if (secretCode.containsKey("trans") && message.equals(secretCode.getString("name"))) {
             JSONArray array = secretCode.getJSONArray("trans");
-            return IntStream.range(0, array.size()).mapToObj(array :: getString).collect(Collectors.toList());
+            return IntStream.range(0, array.size()).mapToObj(array::getString).collect(Collectors.toList());
         } else return null;
     }
 

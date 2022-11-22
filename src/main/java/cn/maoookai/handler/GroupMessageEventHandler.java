@@ -2,7 +2,6 @@ package cn.maoookai.handler;
 
 import cn.maoookai.service.impl.DailyEnglishServiceImpl;
 import cn.maoookai.util.FileReadUtil;
-import cn.maoookai.util.HttpGetUtil;
 import cn.maoookai.util.ImageStitchUtil;
 import cn.maoookai.util.RandomNumberUtil;
 import net.mamoe.mirai.contact.Contact;
