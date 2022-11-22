@@ -111,6 +111,7 @@ public class GroupMessageEventHandler {
         }
 
         if (messageContent.startsWith("图片")) {
+            fromGroup.sendMessage(new At(event.getSender().getId()).plus("让我找找..."));
             HttpClient httpClient = HttpClients.createDefault();
             HttpPost httpPost = new HttpPost(properties.getProperty("imageAddress"));
             String keyword = messageContent.substring(2);
