@@ -12,7 +12,7 @@ public class LogFileScheduler implements Runnable {
         Date date = new Date(System.currentTimeMillis());
         File oldFile = new File("log/mirai.log");
         if (oldFile.exists()) {
-            if (oldFile.renameTo(new File("log/"+simpleDateFormat.format(date) + ".log"))) {
+            if (oldFile.renameTo(new File("log/" + simpleDateFormat.format(date) + ".log"))) {
                 System.out.println("Old log is filed to log/" + simpleDateFormat.format(date) + ".log");
             }
             File newFile = new File("log/mirai.log");

@@ -2,7 +2,6 @@ package cn.maoookai.handler;
 
 import cn.maoookai.service.impl.DailyEnglishServiceImpl;
 import cn.maoookai.util.FileReadUtil;
-import cn.maoookai.util.HttpGetUtil;
 import cn.maoookai.util.ImageStitchUtil;
 import cn.maoookai.util.RandomNumberUtil;
 import net.mamoe.mirai.contact.Contact;
@@ -112,6 +111,7 @@ public class GroupMessageEventHandler {
         }
 
         if (messageContent.startsWith("图片")) {
+            fromGroup.sendMessage(new At(event.getSender().getId()).plus("让我找找..."));
             HttpClient httpClient = HttpClients.createDefault();
             HttpPost httpPost = new HttpPost(properties.getProperty("imageAddress"));
             String keyword = messageContent.substring(2);
