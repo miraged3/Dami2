@@ -5,6 +5,7 @@ import cn.maoookai.scheduler.LogFileScheduler;
 import net.mamoe.mirai.Bot;
 import net.mamoe.mirai.BotFactory;
 import net.mamoe.mirai.utils.BotConfiguration;
+import xyz.cssxsh.mirai.tool.FixProtocolVersion;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -17,6 +18,7 @@ import java.util.concurrent.TimeUnit;
 public class DamiMainApp {
 
     public static void main(String[] args) throws Exception {
+        FixProtocolVersion.update();
         InputStream in = new FileInputStream("config.properties");
         Properties properties = new Properties();
         properties.load(in);
